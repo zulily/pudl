@@ -1,0 +1,6 @@
+python-ldap
+pyyaml
+sphinx
+pygments
+sphinx_rtd_theme
+sphinx-argparse
