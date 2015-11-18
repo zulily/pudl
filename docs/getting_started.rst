@@ -88,3 +88,8 @@ Basic Usage
         sys.exit(main())
 
 *For additional usage examples, reviewing the* :doc:`pudl` *cli* source is recommended
+
+Why is this package named pudl?
+===============================
+While pronounced like "puddle", the name is loosely related to 'pudl'.replace('u', 'a')[::-1].
+

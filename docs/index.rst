@@ -14,10 +14,6 @@ While not necessarily a replacement for existing client libraries and the ldapse
 and bundled `cli <./pudl.html>`_ are perhaps simpler to work with than alternatives, for many
 common queries.
 
-Why the name "pudl"
-===================
-While pronounced like "puddle", the name is somewhat related to 'pudl'.replace('u', 'a')[::-1].
-
 Contents:
 
 .. toctree::
