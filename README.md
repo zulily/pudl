@@ -30,6 +30,7 @@ Installation
 + pygments
 + sphinx_rtd_theme
 + sphinx-argparse
++ mock
 
 *Optionally, it may be desirable to set a few envrionment variables, e.g.:*
 

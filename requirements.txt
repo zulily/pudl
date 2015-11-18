@@ -1,3 +1,4 @@
+mock
 python-ldap
 pyyaml
 sphinx

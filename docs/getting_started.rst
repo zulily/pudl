@@ -30,6 +30,7 @@ And for *optional* document generation with sphinx, install the following python
 
 .. code-block:: bash
 
+    pip install mock
     pip install sphinx
     pip install pygments
     pip install sphinx_rtd_theme
