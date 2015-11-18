@@ -1,0 +1,729 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>API Reference &mdash; pudl 0.1.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="pudl 0.1.0 documentation" href="index.html"/>
+        <link rel="next" title="pudl" href="pudl.html"/>
+        <link rel="prev" title="Getting Started" href="getting_started.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> pudl
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#adquery">ADQuery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#aduser">ADUser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#adgroup">ADGroup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#adcomputer">ADComputer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pudl.helper">Helper Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pudl.html">pudl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">pudl</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>API Reference</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/api_reference.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="api-reference">
+<h1>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="adquery">
+<h2>ADQuery<a class="headerlink" href="#adquery" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pudl.ad_query.ADQuery">
+<em class="property">class </em><code class="descclassname">pudl.ad_query.</code><code class="descname">ADQuery</code><span class="sig-paren">(</span><em>user</em>, <em>password</em>, <em>ldap_url='ldap://ldap:389'</em>, <em>tls_no_verify=False</em>, <em>page_size=300</em><span class="sig-paren">)</span><a class="headerlink" href="#pudl.ad_query.ADQuery" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Query Active directory with python-ldap.  May be used directly, but is most
+commonly used indirectly via ADObject-based classes.  All connections
+require TLS.</p>
+<dl class="method">
+<dt id="pudl.ad_query.ADQuery.search">
+<code class="descname">search</code><span class="sig-paren">(</span><em>base_dn</em>, <em>search_filter</em>, <em>attributes=()</em><span class="sig-paren">)</span><a class="headerlink" href="#pudl.ad_query.ADQuery.search" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform an AD search</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>base_dn</strong> (<em>str</em>) &#8211; The base DN to search within</li>
+<li><strong>search_filter</strong> (<em>str</em>) &#8211; The search filter to apply, such as:
+<em>objectClass=person</em></li>
+<li><strong>attributes</strong> (<em>list</em>) &#8211; Object attributes to populate, defaults to all</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="aduser">
+<h2>ADUser<a class="headerlink" href="#aduser" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pudl.ad_user.ADUser">
+<em class="property">class </em><code class="descclassname">pudl.ad_user.</code><code class="descname">ADUser</code><span class="sig-paren">(</span><em>adq</em><span class="sig-paren">)</span><a class="headerlink" href="#pudl.ad_user.ADUser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">pudl.ad_object.ADObject</span></code></p>
+<p>A class to represent AD user objects.  Includes a number of
+helper methods, particularly object-factory related.</p>
+<p>ADUser objects have minimal depth, with attributes set to
+strings or lists.  Available attributes are dependendent
+on the results returned by the LDAP query.</p>
+<dl class="method">
+<dt id="pudl.ad_user.ADUser.group_samaccountnames">
+<code class="descname">group_samaccountnames</code><span class="sig-paren">(</span><em>base_dn</em><span class="sig-paren">)</span><a class="headerlink" href="#pudl.ad_user.ADUser.group_samaccountnames" title="Permalink to this definition">¶</a></dt>
+<dd><p>For the current ADUser instance, determine which
+groups the user is a member of and convert the
+group DistinguishedNames to sAMAccountNames.
+The resulting list of groups may not be complete
+if explicit_membership_only was set to
+True when the object factory method (user() or users()) was
+called.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>base_dn</strong> (<em>str</em>) &#8211; The base DN to search within</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A list of groups (sAMAccountNames) for which the
+current ADUser instance is a member, sAMAccountNames</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pudl.ad_user.ADUser.is_member">
+<code class="descname">is_member</code><span class="sig-paren">(</span><em>group_distinguishedname</em><span class="sig-paren">)</span><a class="headerlink" href="#pudl.ad_user.ADUser.is_member" title="Permalink to this definition">¶</a></dt>
+<dd><p>For the current ADUser instance, determine which
+groups the user is a member of and convert the
+group DistinguishedNames to sAMAccountNames.  The result
+may not be accurate if explicit_membership_only was set to
+True when the object factory method (user() or users()) was
+called.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>group_distinguishedname</strong> (<em>str</em>) &#8211; The group DistinguishedName</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A boolean indicating whether or not the user is a member of the group</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pudl.ad_user.ADUser.samaccountname">
+<code class="descname">samaccountname</code><span class="sig-paren">(</span><em>base_dn</em>, <em>distinguished_name</em><span class="sig-paren">)</span><a class="headerlink" href="#pudl.ad_user.ADUser.samaccountname" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the sAMAccountName for a specific DistinguishedName</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>base_dn</strong> (<em>str</em>) &#8211; The base DN to search within</li>
+<li><strong>distinguished_name</strong> (<em>list</em>) &#8211; The base DN to search within</li>
+<li><strong>attributes</strong> (<em>list</em>) &#8211; Object attributes to populate, defaults to all</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A populated ADUser object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#pudl.ad_user.ADUser" title="pudl.ad_user.ADUser">ADUser</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pudl.ad_user.ADUser.samaccountnames">
+<code class="descname">samaccountnames</code><span class="sig-paren">(</span><em>base_dn</em>, <em>distinguished_names</em><span class="sig-paren">)</span><a class="headerlink" href="#pudl.ad_user.ADUser.samaccountnames" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the sAMAccountNames for the specified DNs</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>base_dn</strong> (<em>str</em>) &#8211; The base DN to search within</li>
+<li><strong>distinguished_name</strong> (<em>list</em>) &#8211; A list of distinguished names for which to
+retrieve sAMAccountNames</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Key/value pairs mapping DistinguishedName to sAMAccountName</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dict</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pudl.ad_user.ADUser.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pudl.ad_user.ADUser.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prepare a minimal dictionary with keys mapping to attributes for
+the current instance.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pudl.ad_user.ADUser.user">
+<code class="descname">user</code><span class="sig-paren">(</span><em>base_dn</em>, <em>samaccountname</em>, <em>attributes=()</em>, <em>explicit_membership_only=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pudl.ad_user.ADUser.user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Produces a single, populated ADUser object through the object factory.
+Does not populate attributes for the caller instance.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>base_dn</strong> (<em>str</em>) &#8211; The base DN to search within</li>
+<li><strong>samaccountname</strong> (<em>str</em>) &#8211; The user&#8217;s sAMAccountName</li>
+<li><strong>attributes</strong> (<em>list</em>) &#8211; Object attributes to populate, defaults to all</li>
+<li><strong>explicit_membership_only</strong> (<em>bool</em>) &#8211; If set True, memberof will only
+list groups for which the user is a directly referenced member</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A populated ADUser object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#pudl.ad_user.ADUser" title="pudl.ad_user.ADUser">ADUser</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pudl.ad_user.ADUser.users">
+<code class="descname">users</code><span class="sig-paren">(</span><em>base_dn</em>, <em>samaccountnames=()</em>, <em>attributes=()</em>, <em>explicit_membership_only=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pudl.ad_user.ADUser.users" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gathers a list of ADUser objects</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>base_dn</strong> (<em>str</em>) &#8211; The base DN to search within</li>
+<li><strong>attributes</strong> (<em>list</em>) &#8211; Object attributes to populate, defaults to all</li>
+<li><strong>samaccountnames</strong> (<em>list</em>) &#8211; A list of usernames for which objects will be
+created, defaults to all users if unspecified</li>
+<li><strong>explicit_membership_only</strong> (<em>bool</em>) &#8211; If set True, memberof will only
+list groups for which users are directly referenced members</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A list of populated ADUser objects</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="adgroup">
+<h2>ADGroup<a class="headerlink" href="#adgroup" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pudl.ad_group.ADGroup">
+<em class="property">class </em><code class="descclassname">pudl.ad_group.</code><code class="descname">ADGroup</code><span class="sig-paren">(</span><em>adq</em><span class="sig-paren">)</span><a class="headerlink" href="#pudl.ad_group.ADGroup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">pudl.ad_object.ADObject</span></code></p>
+<p>A class to represent AD group objects.  Includes a number of
+helper methods, particularly object-factory related.</p>
+<p>ADGroup objects have minimal depth, with attributes set to
+strings or lists.  Available attributes are dependendent
+on the results returned by the LDAP query.</p>
+<p>In its current implementation, the memberOf attribute
+is not expanded.  The member attribute is however flattened out.</p>
+<dl class="method">
+<dt id="pudl.ad_group.ADGroup.group">
+<code class="descname">group</code><span class="sig-paren">(</span><em>base_dn</em>, <em>samaccountname</em>, <em>attributes=()</em>, <em>explicit_membership_only=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pudl.ad_group.ADGroup.group" title="Permalink to this definition">¶</a></dt>
+<dd><p>Produces a single, populated ADGroup object through the object factory.
+Does not populate attributes for the caller instance.</p>
+<p>sAMAccountName may not be present in group objects in modern AD schemas.
+Searching by common name and object class (group) may be an alternative
+approach if required in the future.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>base_dn</strong> (<em>str</em>) &#8211; The base DN to search within</li>
+<li><strong>samaccountname</strong> (<em>str</em>) &#8211; The group&#8217;s sAMAccountName</li>
+<li><strong>attributes</strong> (<em>list</em>) &#8211; Object attributes to populate, defaults to all</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A populated ADGroup object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#pudl.ad_group.ADGroup" title="pudl.ad_group.ADGroup">ADGroup</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pudl.ad_group.ADGroup.groups">
+<code class="descname">groups</code><span class="sig-paren">(</span><em>base_dn</em>, <em>samaccountnames=()</em>, <em>attributes=()</em>, <em>explicit_membership_only=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pudl.ad_group.ADGroup.groups" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gathers a list of ADGroup objects</p>
+<p>sAMAccountName may not be present in group objects in modern AD schemas.
+Searching by common name and object class (group) may be an alternative
+approach if required in the future.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>base_dn</strong> (<em>str</em>) &#8211; The base DN to search within</li>
+<li><strong>samaccountnames</strong> (<em>list</em>) &#8211; A list of group names for which objects will be
+created, defaults to all groups if unspecified</li>
+<li><strong>attributes</strong> (<em>list</em>) &#8211; Object attributes to populate, defaults to all</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A list of populated ADGroup objects</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pudl.ad_group.ADGroup.samaccountname">
+<code class="descname">samaccountname</code><span class="sig-paren">(</span><em>base_dn</em>, <em>distinguished_name</em><span class="sig-paren">)</span><a class="headerlink" href="#pudl.ad_group.ADGroup.samaccountname" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the sAMAccountName for a specific DistinguishedName</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>base_dn</strong> (<em>str</em>) &#8211; The base DN to search within</li>
+<li><strong>distinguished_name</strong> (<em>list</em>) &#8211; The base DN to search within</li>
+<li><strong>attributes</strong> (<em>list</em>) &#8211; Object attributes to populate, defaults to all</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A populated ADUser object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#pudl.ad_user.ADUser" title="pudl.ad_user.ADUser">ADUser</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pudl.ad_group.ADGroup.samaccountnames">
+<code class="descname">samaccountnames</code><span class="sig-paren">(</span><em>base_dn</em>, <em>distinguished_names</em><span class="sig-paren">)</span><a class="headerlink" href="#pudl.ad_group.ADGroup.samaccountnames" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the sAMAccountNames for the specified DNs</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>base_dn</strong> (<em>str</em>) &#8211; The base DN to search within</li>
+<li><strong>distinguished_name</strong> (<em>list</em>) &#8211; A list of distinguished names for which to
+retrieve sAMAccountNames</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Key/value pairs mapping DistinguishedName to sAMAccountName</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dict</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pudl.ad_group.ADGroup.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pudl.ad_group.ADGroup.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prepare a minimal dictionary with keys mapping to attributes for
+the current instance.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="adcomputer">
+<h2>ADComputer<a class="headerlink" href="#adcomputer" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pudl.ad_computer.ADComputer">
+<em class="property">class </em><code class="descclassname">pudl.ad_computer.</code><code class="descname">ADComputer</code><span class="sig-paren">(</span><em>adq</em><span class="sig-paren">)</span><a class="headerlink" href="#pudl.ad_computer.ADComputer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">pudl.ad_object.ADObject</span></code></p>
+<p>A class to represent AD computer objects.  Includes a number of
+helper methods, particularly object-factory related.</p>
+<p>ADComputer objects have minimal depth, with attributes set to
+strings or lists.  Available attributes are dependendent
+on the results returned by the LDAP query.</p>
+<dl class="method">
+<dt id="pudl.ad_computer.ADComputer.computer">
+<code class="descname">computer</code><span class="sig-paren">(</span><em>base_dn</em>, <em>samaccountname</em>, <em>attributes=()</em><span class="sig-paren">)</span><a class="headerlink" href="#pudl.ad_computer.ADComputer.computer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Produces a single, populated ADComputer object through the object factory.
+Does not populate attributes for the caller instance.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>base_dn</strong> (<em>str</em>) &#8211; The base DN to search within</li>
+<li><strong>samaccountname</strong> (<em>str</em>) &#8211; The computer&#8217;s sAMAccountName</li>
+<li><strong>attributes</strong> (<em>list</em>) &#8211; Object attributes to populate, defaults to all</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A populated ADComputer object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#pudl.ad_computer.ADComputer" title="pudl.ad_computer.ADComputer">ADComputer</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pudl.ad_computer.ADComputer.computers">
+<code class="descname">computers</code><span class="sig-paren">(</span><em>base_dn</em>, <em>samaccountnames=()</em>, <em>attributes=()</em><span class="sig-paren">)</span><a class="headerlink" href="#pudl.ad_computer.ADComputer.computers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gathers a list of ADComputer objects</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>base_dn</strong> (<em>str</em>) &#8211; The base DN to search within</li>
+<li><strong>samaccountnames</strong> (<em>list</em>) &#8211; A list of computer names for which objects will be
+created, defaults to all computers if unspecified</li>
+<li><strong>attributes</strong> (<em>list</em>) &#8211; Object attributes to populate, defaults to all</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A list of populated ADComputer objects</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pudl.ad_computer.ADComputer.samaccountname">
+<code class="descname">samaccountname</code><span class="sig-paren">(</span><em>base_dn</em>, <em>distinguished_name</em><span class="sig-paren">)</span><a class="headerlink" href="#pudl.ad_computer.ADComputer.samaccountname" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the sAMAccountName for a specific DistinguishedName</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>base_dn</strong> (<em>str</em>) &#8211; The base DN to search within</li>
+<li><strong>distinguished_name</strong> (<em>list</em>) &#8211; The base DN to search within</li>
+<li><strong>attributes</strong> (<em>list</em>) &#8211; Object attributes to populate, defaults to all</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A populated ADUser object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#pudl.ad_user.ADUser" title="pudl.ad_user.ADUser">ADUser</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pudl.ad_computer.ADComputer.samaccountnames">
+<code class="descname">samaccountnames</code><span class="sig-paren">(</span><em>base_dn</em>, <em>distinguished_names</em><span class="sig-paren">)</span><a class="headerlink" href="#pudl.ad_computer.ADComputer.samaccountnames" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the sAMAccountNames for the specified DNs</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>base_dn</strong> (<em>str</em>) &#8211; The base DN to search within</li>
+<li><strong>distinguished_name</strong> (<em>list</em>) &#8211; A list of distinguished names for which to
+retrieve sAMAccountNames</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Key/value pairs mapping DistinguishedName to sAMAccountName</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dict</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pudl.ad_computer.ADComputer.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pudl.ad_computer.ADComputer.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prepare a minimal dictionary with keys mapping to attributes for
+the current instance.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pudl.helper">
+<span id="helper-functions"></span><h2>Helper Functions<a class="headerlink" href="#module-pudl.helper" title="Permalink to this headline">¶</a></h2>
+<p>helper - a module containing a collection useful object manipulations</p>
+<dl class="function">
+<dt id="pudl.helper.object_filter">
+<code class="descclassname">pudl.helper.</code><code class="descname">object_filter</code><span class="sig-paren">(</span><em>objects</em>, <em>grep</em><span class="sig-paren">)</span><a class="headerlink" href="#pudl.helper.object_filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filter out any objects that do not have attributes with values matching
+<em>all</em> regular expressions present in grep (AND essentially)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>ADObject</strong> (<em>objects</em>) &#8211; A list of ADObjects</li>
+<li><strong>list</strong> (<em>grep</em>) &#8211; A list of regular expressions that must match for filtering</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A list of filtered ADObjects</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pudl.helper.serialize">
+<code class="descclassname">pudl.helper.</code><code class="descname">serialize</code><span class="sig-paren">(</span><em>ad_objects</em>, <em>output_format='json'</em>, <em>indent=2</em>, <em>attributes_only=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pudl.helper.serialize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Serialize the object to the specified format</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>list</strong> (<em>ad_objects</em>) &#8211; A list of ADObjects to serialize</li>
+<li><strong>str</strong> (<em>output_format</em>) &#8211; The output format, json or yaml.  Defaults to json</li>
+<li><strong>int</strong> (<em>indent</em>) &#8211; The number of spaces to indent, defaults to 2</li>
+<li><strong>only</strong> (<em>attributes</em>) &#8211; Only serialize the attributes found in the first record of the list
+of ADObjects</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A serialized, formatted representation of the list of ADObjects</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">str</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="pudl.html" class="btn btn-neutral float-right" title="pudl" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="getting_started.html" class="btn btn-neutral" title="Getting Started" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, zulily.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

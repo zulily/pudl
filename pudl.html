@@ -1,0 +1,570 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>pudl &mdash; pudl 0.1.0 documentation</title>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+
+
+
+
+
+    <link rel="top" title="pudl 0.1.0 documentation" href="index.html"/>
+        <link rel="next" title="License" href="license.html"/>
+        <link rel="prev" title="API Reference" href="api_reference.html"/>
+
+
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+
+
+
+            <a href="index.html" class="icon icon-home"> pudl
+
+
+
+          </a>
+
+
+
+
+              <div class="version">
+                0.1.0
+              </div>
+
+
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+
+
+
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_reference.html">API Reference</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">pudl</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#environment-variables">Environment Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-usage">Example Usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pull-specific-ad-user-objects">Pull Specific AD User Objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pull-a-paired-down-user-object">Pull a Paired-Down User Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ad-object-grep">AD Object grep!</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#retrieve-ad-group-objects">Retrieve AD Group Objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#list-ad-object-attributes">List AD Object Attributes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#command-line-reference">Command-line Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">pudl</a>
+      </nav>
+
+
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+
+    <li>pudl</li>
+      <li class="wy-breadcrumbs-aside">
+
+
+            <a href="_sources/pudl.txt" rel="nofollow"> View page source</a>
+
+
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+
+  <div class="section" id="pudl">
+<h1>pudl<a class="headerlink" href="#pudl" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p><strong>pudl</strong> is a bundled command-line interface which wraps much of the functionality
+present in the pudl package modules.  Not only does it demonstrate usage of the functionality present
+in pudl package modules, it also perhaps serves as a reasonable alternative to ldapsearch for the most
+common types of queries.  With its simplified interface (and contrary to ldapsearch), there is no
+need to create custom ldap filters.  Additionally, pudl has the added benefits of regular expression
+object filtering and object serialization, in json or yaml format.  Note that all values returned are
+strings.</p>
+</div>
+<div class="section" id="environment-variables">
+<h2>Environment Variables<a class="headerlink" href="#environment-variables" title="Permalink to this headline">¶</a></h2>
+<p>To keep the pudl syntax as simple and minimal as possible, setting a few environment variables and
+adding them to an init file such as ~/.bashrc is advised:</p>
+<ul class="simple">
+<li><strong>PUDL_BASE_DN</strong> - This is an important one to set, such as &#8216;OU=Departments,DC=example,DC=com&#8217;.</li>
+<li><strong>PUDL_DOMAIN</strong> - Also a key setting, the AD domain is prepended to the user name for authentication.</li>
+<li><strong>PUDL_PAGE_SIZE</strong> - Adjusting the page size may result in faster queries, defaults to 300 results per page.</li>
+<li><strong>PUDL_TLS_NO_VERIFY</strong> - Provides an encrypted communication channel with TLS, but does not verify the server&#8217;s
+identity.  Use with caution.</li>
+</ul>
+</div>
+<div class="section" id="example-usage">
+<h2>Example Usage<a class="headerlink" href="#example-usage" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="pull-specific-ad-user-objects">
+<h3>Pull Specific AD User Objects<a class="headerlink" href="#pull-specific-ad-user-objects" title="Permalink to this headline">¶</a></h3>
+<p><em>Pulls two full user objects. Outputs json by default, with
+yaml being another supported output format.</em></p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>pudl user bhodges jdupont
+</pre></div>
+</div>
+</div>
+<div class="section" id="pull-a-paired-down-user-object">
+<h3>Pull a Paired-Down User Object<a class="headerlink" href="#pull-a-paired-down-user-object" title="Permalink to this headline">¶</a></h3>
+<p><em>Pull a single user object with just three specific attributes,
+output results as yaml.</em></p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>pudl user -a samaccountname -a title -a memberof --output-format<span class="o">=</span>yaml bhodges
+</pre></div>
+</div>
+</div>
+<div class="section" id="ad-object-grep">
+<h3>AD Object grep!<a class="headerlink" href="#ad-object-grep" title="Permalink to this headline">¶</a></h3>
+<p><em>Pull all user objects with just two specific attributes, but filter
+down to only those that that match a regular expression. Note that matching is case-insensitive.</em></p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>pudl user -a samaccountname -a title --grep<span class="o">=</span><span class="s2">&quot;[iI]nfrastruct.re&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="retrieve-ad-group-objects">
+<h3>Retrieve AD Group Objects<a class="headerlink" href="#retrieve-ad-group-objects" title="Permalink to this headline">¶</a></h3>
+<p><em>Pull all attributes for three groups. Note that while member attribute items
+are fully expanded by default, the memberOf attribute is not currently flattened.</em></p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>pudl group HR Finance Technology
+</pre></div>
+</div>
+</div>
+<div class="section" id="list-ad-object-attributes">
+<h3>List AD Object Attributes<a class="headerlink" href="#list-ad-object-attributes" title="Permalink to this headline">¶</a></h3>
+<p><em>Return a list of all attribute names for the first returned object in
+the results set</em></p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>pudl user --attributes-only bhodges
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="command-line-reference">
+<h2>Command-line Reference<a class="headerlink" href="#command-line-reference" title="Permalink to this headline">¶</a></h2>
+<p>A script for interacting with Active Directory, leveraging python-ldap</p>
+<pre class="literal-block">
+usage: pudl [-h] [-V] {user,group,computer} ...
+</pre>
+<dl class="docutils">
+<dt>Options:</dt>
+<dd><table class="first last docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd><span class="option">-V</span>, <span class="option">--version</span></kbd></td>
+<td>Print the version number and exit</td></tr>
+</tbody>
+</table>
+</dd>
+<dt>Sub-commands:</dt>
+<dd><dl class="first last docutils">
+<dt><strong>user</strong></dt>
+<dd><p class="first">Pull user objects from AD</p>
+<pre class="literal-block">
+usage: pudl user [-h] [--user USER] [--password PASSWORD] [--host HOST]
+                 [--port PORT] [--page-size PAGE_SIZE] [--base-dn BASE_DN]
+                 [--attribute ATTRIBUTE] [--grep GREP] [--attributes-only]
+                 [--output-format {json,yaml}] [--verbose] [--debug]
+                 [--tls-no-verify] [--explicit-membership-only]
+                 [samaccountnames [samaccountnames ...]]
+</pre>
+<dl class="last docutils">
+<dt>Positional arguments:</dt>
+<dd><table class="first last docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group" colspan="2">
+<kbd>samaccountnames</kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>sAMAccountNames for any user objects that are to be looked up. If unspecified, returns all users under the base DN provided</td></tr>
+</tbody>
+</table>
+</dd>
+<dt>Options:</dt>
+<dd><table class="first last docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--user=EXAMPLE\user</span>, <span class="option">-u=EXAMPLE\user</span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>The ldap user (bind dn) to connect as. The full DN will work, or often, just the CN may be sufficient, such as &#8220;John Smith&#8221;, or more commonly, specify the domain and sAMAccountName. Defaults to EXAMPLE\username.  The domain portion may be overridden with PUDL_DOMAIN</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">--password</span>, <span class="option">-p</span></kbd></td>
+<td>The connecting user&#8217;s password</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--host=ldap</span>, <span class="option">-H=ldap</span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>The AD/LDAP host, defaults to ldap</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--port=389</span>, <span class="option">-P=389</span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>The ldap port, defaults to 389.  389 is is the standard port</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--page-size=389</span>, <span class="option">-s=389</span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>The ldap results are paged, specify the number of results per page, defaults to 300. May be overridden with PUDL_PAGE_SIZE</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--base-dn=OU=Departments,DC=example,DC=com</span>, <span class="option">-b=OU=Departments,DC=example,DC=com</span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>The Base DN to use, defaults to OU=Departments,DC=example,DC=com. May be overridden with PUDL_BASE_DN</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--attribute</span>, <span class="option">-a</span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>Attributes to include in results objects.  Note that any nested objects return all attributes.  Maybe be used multiple times, and if not specified, all attributes are included in top-level objects</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">--grep</span>, <span class="option">-g</span></kbd></td>
+<td>Filter results to only those matching the specified regular expression (compares against all attributes). May be used multiple times</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--attributes-only=False</span>, <span class="option">-A=False</span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>Only display a list of attributes that are present for the object type returned by the LDAP query</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--output-format=json</span>, <span class="option">-f=json</span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td><p class="first">Output format, defaults to json.</p>
+<p class="last">Possible choices: json, yaml</p>
+</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--verbose=False</span>, <span class="option">-v=False</span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>Turn on verbose output</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--debug=False</span>, <span class="option">-d=False</span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>Print out debugging information, very chatty</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--tls-no-verify=False</span>, <span class="option">-V=False</span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>Don&#8217;t verify the authenticity of the server&#8217;s certificate, defaults to False and may be overridden with PUDL_TLS_NO_VERIFY</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--explicit-membership-only=False</span>, <span class="option">-e=False</span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>Only show membership for users that is explicit, not taking into account group nesting.  Defaults to False</td></tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt><strong>group</strong></dt>
+<dd><p class="first">Pull group objects from AD</p>
+<pre class="literal-block">
+usage: pudl group [-h] [--user USER] [--password PASSWORD] [--host HOST]
+                  [--port PORT] [--page-size PAGE_SIZE] [--base-dn BASE_DN]
+                  [--attribute ATTRIBUTE] [--grep GREP] [--attributes-only]
+                  [--output-format {json,yaml}] [--verbose] [--debug]
+                  [--tls-no-verify] [--explicit-membership-only]
+                  [samaccountnames [samaccountnames ...]]
+</pre>
+<dl class="last docutils">
+<dt>Positional arguments:</dt>
+<dd><table class="first last docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group" colspan="2">
+<kbd>samaccountnames</kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>sAMAccountNames for any group objects that are to be looked up. If unspecified, returns all groups under the base DN provided. sAMAccountName may not be present in group objects in modern AD schemas</td></tr>
+</tbody>
+</table>
+</dd>
+<dt>Options:</dt>
+<dd><table class="first last docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--user=EXAMPLE\user</span>, <span class="option">-u=EXAMPLE\user</span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>The ldap user (bind dn) to connect as. The full DN will work, or often, just the CN may be sufficient, such as &#8220;John Smith&#8221;, or more commonly, specify the domain and sAMAccountName. Defaults to EXAMPLE\username.  The domain portion may be overridden with PUDL_DOMAIN</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">--password</span>, <span class="option">-p</span></kbd></td>
+<td>The connecting user&#8217;s password</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--host=ldap</span>, <span class="option">-H=ldap</span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>The AD/LDAP host, defaults to ldap</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--port=389</span>, <span class="option">-P=389</span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>The ldap port, defaults to 389.  389 is is the standard port</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--page-size=389</span>, <span class="option">-s=389</span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>The ldap results are paged, specify the number of results per page, defaults to 300. May be overridden with PUDL_PAGE_SIZE</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--base-dn=OU=Departments,DC=example,DC=com</span>, <span class="option">-b=OU=Departments,DC=example,DC=com</span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>The Base DN to use, defaults to OU=Departments,DC=example,DC=com. May be overridden with PUDL_BASE_DN</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--attribute</span>, <span class="option">-a</span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>Attributes to include in results objects.  Note that any nested objects return all attributes.  Maybe be used multiple times, and if not specified, all attributes are included in top-level objects</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">--grep</span>, <span class="option">-g</span></kbd></td>
+<td>Filter results to only those matching the specified regular expression (compares against all attributes). May be used multiple times</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--attributes-only=False</span>, <span class="option">-A=False</span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>Only display a list of attributes that are present for the object type returned by the LDAP query</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--output-format=json</span>, <span class="option">-f=json</span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td><p class="first">Output format, defaults to json.</p>
+<p class="last">Possible choices: json, yaml</p>
+</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--verbose=False</span>, <span class="option">-v=False</span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>Turn on verbose output</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--debug=False</span>, <span class="option">-d=False</span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>Print out debugging information, very chatty</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--tls-no-verify=False</span>, <span class="option">-V=False</span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>Don&#8217;t verify the authenticity of the server&#8217;s certificate, defaults to False and may be overridden with PUDL_TLS_NO_VERIFY</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--explicit-membership-only=False</span>, <span class="option">-e=False</span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>Only show membership for users that is explicit, not taking into account group nesting.  Defaults to False</td></tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt><strong>computer</strong></dt>
+<dd><p class="first">Pull computer objects from AD</p>
+<pre class="literal-block">
+usage: pudl computer [-h] [--user USER] [--password PASSWORD] [--host HOST]
+                     [--port PORT] [--page-size PAGE_SIZE] [--base-dn BASE_DN]
+                     [--attribute ATTRIBUTE] [--grep GREP] [--attributes-only]
+                     [--output-format {json,yaml}] [--verbose] [--debug]
+                     [--tls-no-verify]
+                     [samaccountnames [samaccountnames ...]]
+</pre>
+<dl class="last docutils">
+<dt>Positional arguments:</dt>
+<dd><table class="first last docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group" colspan="2">
+<kbd>samaccountnames</kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>sAMAccountNames for any computer objects that are to be looked up. If unspecified, returns all computers under the base DN provided.</td></tr>
+</tbody>
+</table>
+</dd>
+<dt>Options:</dt>
+<dd><table class="first last docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--user=EXAMPLE\user</span>, <span class="option">-u=EXAMPLE\user</span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>The ldap user (bind dn) to connect as. The full DN will work, or often, just the CN may be sufficient, such as &#8220;John Smith&#8221;, or more commonly, specify the domain and sAMAccountName. Defaults to EXAMPLE\username.  The domain portion may be overridden with PUDL_DOMAIN</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">--password</span>, <span class="option">-p</span></kbd></td>
+<td>The connecting user&#8217;s password</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--host=ldap</span>, <span class="option">-H=ldap</span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>The AD/LDAP host, defaults to ldap</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--port=389</span>, <span class="option">-P=389</span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>The ldap port, defaults to 389.  389 is is the standard port</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--page-size=389</span>, <span class="option">-s=389</span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>The ldap results are paged, specify the number of results per page, defaults to 300. May be overridden with PUDL_PAGE_SIZE</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--base-dn=OU=Departments,DC=example,DC=com</span>, <span class="option">-b=OU=Departments,DC=example,DC=com</span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>The Base DN to use, defaults to OU=Departments,DC=example,DC=com. May be overridden with PUDL_BASE_DN</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--attribute</span>, <span class="option">-a</span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>Attributes to include in results objects.  Note that any nested objects return all attributes.  Maybe be used multiple times, and if not specified, all attributes are included in top-level objects</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">--grep</span>, <span class="option">-g</span></kbd></td>
+<td>Filter results to only those matching the specified regular expression (compares against all attributes). May be used multiple times</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--attributes-only=False</span>, <span class="option">-A=False</span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>Only display a list of attributes that are present for the object type returned by the LDAP query</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--output-format=json</span>, <span class="option">-f=json</span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td><p class="first">Output format, defaults to json.</p>
+<p class="last">Possible choices: json, yaml</p>
+</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--verbose=False</span>, <span class="option">-v=False</span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>Turn on verbose output</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--debug=False</span>, <span class="option">-d=False</span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>Print out debugging information, very chatty</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--tls-no-verify=False</span>, <span class="option">-V=False</span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>Don&#8217;t verify the authenticity of the server&#8217;s certificate, defaults to False and may be overridden with PUDL_TLS_NO_VERIFY</td></tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+
+        <a href="license.html" class="btn btn-neutral float-right" title="License" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+
+
+        <a href="api_reference.html" class="btn btn-neutral" title="API Reference" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+
+    </div>
+
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, zulily.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+
+
+
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+
+
+
+
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+
+
+</body>
+</html>

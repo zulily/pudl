@@ -1,0 +1,300 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Getting Started &mdash; pudl 0.1.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="pudl 0.1.0 documentation" href="index.html"/>
+        <link rel="next" title="API Reference" href="api_reference.html"/>
+        <link rel="prev" title="Welcome to pudl’s documentation!" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> pudl
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pip">pip</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tls">TLS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#basic-usage">Basic Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#why-is-this-package-named-pudl">Why is this package named pudl?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api_reference.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pudl.html">pudl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">pudl</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Getting Started</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/getting_started.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="getting-started">
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="prerequisites">
+<h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h3>
+<p><em>To get up and running, the following must be installed:</em></p>
+<ul class="simple">
+<li>python 2.7.x</li>
+<li>python-dev</li>
+<li>libsasl2-dev</li>
+<li>libldap2-dev</li>
+<li>libyaml-dev</li>
+</ul>
+</div>
+<div class="section" id="pip">
+<h3>pip<a class="headerlink" href="#pip" title="Permalink to this headline">¶</a></h3>
+<p>From the top-level directory of the cloned repository:</p>
+<div class="highlight-bash"><div class="highlight"><pre>pip install .
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This is typically performed with an active python virtual environment.</p>
+</div>
+<p>And for <em>optional</em> document generation with sphinx, install the following python packages as well:</p>
+<div class="highlight-bash"><div class="highlight"><pre>pip install sphinx
+pip install pygments
+pip install sphinx_rtd_theme
+pip install sphinx-argparse
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="tls">
+<h2>TLS<a class="headerlink" href="#tls" title="Permalink to this headline">¶</a></h2>
+<p>pudl only communicates with Active Directory over TLS and by default, the
+remote server must meet strict criteria such as the commonname matching
+the hostname in the LDAP URL, and the remote server must present a
+certificate that is signed by a trusted authority.</p>
+<p>Adding a trusted CA to a Linux system varies by distribution, but is rather
+simple with ubuntu:</p>
+<ol class="arabic simple">
+<li>Copy the CA certificate (.CER format) to /usr/share/ca-certificates/extra/</li>
+<li>chown the CA certificate to root.root and chmod it to 444</li>
+<li>Run sudo dpkg-reconfigure ca-certificates</li>
+</ol>
+<p>If the only requirement is an encrypted channel and not verifying
+the identity of the remote server, the ADQuery constructor takes a tls_no_verify
+parameter, and the pudl CLI has a &#8211;tls-no-verify argument.  Use
+these options with caution.</p>
+</div>
+<div class="section" id="basic-usage">
+<h2>Basic Usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">¶</a></h2>
+<p><strong>Pull a user object (bhodges) and a few attributes to print out</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">pudl</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">pudl.ad_query</span> <span class="kn">import</span> <span class="n">ADQuery</span>
+<span class="kn">from</span> <span class="nn">pudl.ad_user</span> <span class="kn">import</span> <span class="n">ADUser</span>
+
+<span class="n">BASE_DN</span> <span class="o">=</span> <span class="s">&#39;OU=Departments,DC=example,DC=com&#39;</span>
+<span class="n">LDAP_USER</span> <span class="o">=</span> <span class="s">&#39;jdupont&#39;</span>
+<span class="n">PASSWORD</span> <span class="o">=</span> <span class="s">&#39;my_secret&#39;</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">adq</span> <span class="o">=</span> <span class="n">ADQuery</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">LDAP_USER</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">PASSWORD</span><span class="p">)</span>
+    <span class="n">adu</span> <span class="o">=</span> <span class="n">ADUser</span><span class="p">(</span><span class="n">adq</span><span class="p">)</span>
+    <span class="n">users</span> <span class="o">=</span> <span class="n">adu</span><span class="o">.</span><span class="n">users</span><span class="p">(</span><span class="n">base_dn</span><span class="o">=</span><span class="n">BASE_DN</span><span class="p">,</span> <span class="n">attributes</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;samaccountname&#39;</span><span class="p">,</span> <span class="s">&#39;cn&#39;</span><span class="p">,</span>
+                      <span class="s">&#39;title&#39;</span><span class="p">,],</span> <span class="n">samaccountnames</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;bhodges&#39;</span><span class="p">,])</span>
+
+    <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">users</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s">&#39;{0}: {1}, {2}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">samaccountname</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">cn</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</pre></div>
+</div>
+<p><em>For additional usage examples, reviewing the</em> <a class="reference internal" href="pudl.html"><em>pudl</em></a> <em>cli</em> source is recommended</p>
+</div>
+<div class="section" id="why-is-this-package-named-pudl">
+<h2>Why is this package named pudl?<a class="headerlink" href="#why-is-this-package-named-pudl" title="Permalink to this headline">¶</a></h2>
+<p>While pronounced like &#8220;puddle&#8221;, the name is loosely related to &#8216;pudl&#8217;.replace(&#8216;u&#8217;, &#8216;a&#8217;)[::-1].</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="api_reference.html" class="btn btn-neutral float-right" title="API Reference" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Welcome to pudl’s documentation!" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, zulily.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
