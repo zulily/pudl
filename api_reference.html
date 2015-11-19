@@ -180,7 +180,7 @@ require TLS.</p>
 <p>A class to represent AD user objects.  Includes a number of
 helper methods, particularly object-factory related.</p>
 <p>ADUser objects have minimal depth, with attributes set to
-strings or lists.  Available attributes are dependendent
+strings or lists.  Available attributes are dependent
 on the results returned by the LDAP query.</p>
 <dl class="method">
 <dt id="pudl.ad_user.ADUser.group_samaccountnames">
@@ -210,10 +210,9 @@ current ADUser instance is a member, sAMAccountNames</td>
 <dl class="method">
 <dt id="pudl.ad_user.ADUser.is_member">
 <code class="descname">is_member</code><span class="sig-paren">(</span><em>group_distinguishedname</em><span class="sig-paren">)</span><a class="headerlink" href="#pudl.ad_user.ADUser.is_member" title="Permalink to this definition">¶</a></dt>
-<dd><p>For the current ADUser instance, determine which
-groups the user is a member of and convert the
-group DistinguishedNames to sAMAccountNames.  The result
-may not be accurate if explicit_membership_only was set to
+<dd><p>For the current ADUser instance, determine if
+the user is a member of a specific group (the group DN is used).
+The result may not be accurate if explicit_membership_only was set to
 True when the object factory method (user() or users()) was
 called.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -355,7 +354,7 @@ list groups for which users are directly referenced members</li>
 <p>A class to represent AD group objects.  Includes a number of
 helper methods, particularly object-factory related.</p>
 <p>ADGroup objects have minimal depth, with attributes set to
-strings or lists.  Available attributes are dependendent
+strings or lists.  Available attributes are dependent
 on the results returned by the LDAP query.</p>
 <p>In its current implementation, the memberOf attribute
 is not expanded.  The member attribute is however flattened out.</p>
@@ -486,7 +485,7 @@ the current instance.</p>
 <p>A class to represent AD computer objects.  Includes a number of
 helper methods, particularly object-factory related.</p>
 <p>ADComputer objects have minimal depth, with attributes set to
-strings or lists.  Available attributes are dependendent
+strings or lists.  Available attributes are dependent
 on the results returned by the LDAP query.</p>
 <dl class="method">
 <dt id="pudl.ad_computer.ADComputer.computer">
@@ -607,7 +606,7 @@ the current instance.</p>
 <dt id="pudl.helper.object_filter">
 <code class="descclassname">pudl.helper.</code><code class="descname">object_filter</code><span class="sig-paren">(</span><em>objects</em>, <em>grep</em><span class="sig-paren">)</span><a class="headerlink" href="#pudl.helper.object_filter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Filter out any objects that do not have attributes with values matching
-<em>all</em> regular expressions present in grep (AND essentially)</p>
+<em>all</em> regular expressions present in grep (AND, essentially)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
