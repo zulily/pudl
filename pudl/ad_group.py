@@ -22,7 +22,7 @@ class ADGroup(ADObject):
     helper methods, particularly object-factory related.
 
     ADGroup objects have minimal depth, with attributes set to
-    strings or lists.  Available attributes are dependendent
+    strings or lists.  Available attributes are dependent
     on the results returned by the LDAP query.
 
     In its current implementation, the memberOf attribute

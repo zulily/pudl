@@ -22,7 +22,7 @@ class ADUser(ADObject):
     helper methods, particularly object-factory related.
 
     ADUser objects have minimal depth, with attributes set to
-    strings or lists.  Available attributes are dependendent
+    strings or lists.  Available attributes are dependent
     on the results returned by the LDAP query.
     """
 
@@ -111,10 +111,9 @@ class ADUser(ADObject):
 
 
     def is_member(self, group_distinguishedname):
-        """For the current ADUser instance, determine which
-        groups the user is a member of and convert the
-        group DistinguishedNames to sAMAccountNames.  The result
-        may not be accurate if explicit_membership_only was set to
+        """For the current ADUser instance, determine if
+        the user is a member of a specific group (the group DN is used).
+        The result may not be accurate if explicit_membership_only was set to
         True when the object factory method (user() or users()) was
         called.
 

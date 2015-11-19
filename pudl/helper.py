@@ -19,7 +19,7 @@ import yaml
 
 def object_filter(objects, grep):
     """Filter out any objects that do not have attributes with values matching
-    *all* regular expressions present in grep (AND essentially)
+    *all* regular expressions present in grep (AND, essentially)
 
     :param objects ADObject: A list of ADObjects
     :param grep list: A list of regular expressions that must match for filtering
