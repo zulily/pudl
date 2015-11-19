@@ -20,6 +20,13 @@ Prerequisites
 
 Installation
 ------------
+
+### The Easy Way
+```bash
+pip install pudl
+```
+
+### Manual Installation
 + Create a virtual environment and activate
 + Clone this git repository
 + pip install .
@@ -38,8 +45,6 @@ Installation
 + **PUDL_DOMAIN** - Also a key setting, the AD domain is prepended to the user name for authentication.
 + **PUDL_PAGE_SIZE** - Adjusting the page size may result in faster queries, defaults to 300 results per page.
 + **PUDL_TLS_NO_VERIFY** - Provides an encrypted communication channel with TLS, but does not verify the server's identity.  Use with caution.
-
-**Coming soon...** installation from pypi.
 
 Example CLI Usage
 -----------------
