@@ -132,7 +132,7 @@ def parse_arguments():
                                help='The ldap results are paged, specify the ' + \
                                'number of results per page, defaults to ' + \
                                '{0}. May be overridden with PUDL_PAGE_SIZE'.format(page_size),
-                               type=int, default=389)
+                               type=int, default=page_size)
     parser_common.add_argument('--base-dn', '-b', action='store',
                                dest='base_dn', default=base_dn,
                                help="The Base DN to use, defaults to {0}. ".format(base_dn) + \
