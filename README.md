@@ -5,7 +5,7 @@ common queries.
 
 Documentation
 --------------
-For the full API reference and CLI usage with examples, please see the [full project documentation](http://zulily.github.io/pudl/).
+For the full API reference and CLI usage with examples, please see the [full project documentation](http://pudl.readthedocs.org/en/latest/).
 
 Prerequisites
 --------------
